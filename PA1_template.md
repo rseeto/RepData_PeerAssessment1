@@ -14,20 +14,10 @@ if(!file.exists("activity.csv")){
   download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip", destfile = "rep_data_activity.zip")
   unzip("rep_data_activity.zip")
 }
-```
 
-```
-## Error in download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip", : unsupported URL scheme
-```
-
-```r
 setwd("C:/Users/Ryan Seeto/Documents")
 # reads the data
 activity_data <- read.csv("activity.csv")
-# convert interval from hours and minutes to consecutive minutes
-for(i in 1:nrow(activity_data)){
-  activity_data$interval[i] <- (floor(activity_data$interval[i] / 100) * 60) + (activity_data$interval[i] - (floor(activity_data$interval[i]/ 100)) * 100)
-}
 ```
 
 
@@ -36,6 +26,10 @@ for(i in 1:nrow(activity_data)){
 ```r
 # converts the date column in the "activity_data" dataframe into class "Date""
 activity_data$date <- as.Date(as.character(activity_data$date), "%Y-%m-%d")
+# convert interval from hours and minutes to consecutive minutes
+for(i in 1:nrow(activity_data)){
+  activity_data$interval[i] <- (floor(activity_data$interval[i] / 100) * 60) + (activity_data$interval[i] - (floor(activity_data$interval[i]/ 100)) * 100)
+}
 ```
   
 ### What is mean total number of steps taken per day?
